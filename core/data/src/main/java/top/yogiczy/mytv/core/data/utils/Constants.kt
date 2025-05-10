@@ -12,7 +12,7 @@ object Constants {
     /**
      * 应用 标题
      */
-    const val APP_TITLE = "电视直播"
+    const val APP_TITLE = "看电视"
 
     /**
      * 应用 代码仓库
@@ -31,8 +31,8 @@ object Constants {
     val IPTV_SOURCE_LIST = IptvSourceList(
         listOf(
             IptvSource(
-                name = "默认订阅源 iptv-api",
-                url = "https://gitee.com/mytv-android/iptv-api/raw/master/output/result.m3u",
+                name = "默认订阅源",
+                url = "https://ghfast.top/https://raw.githubusercontent.com/cqbf/tv/main/live.m3u",
             ),
             IptvSource(
                 name = "WebView订阅源",
@@ -61,7 +61,7 @@ object Constants {
     /**
      * 节目单刷新时间阈值（小时）
      */
-    const val EPG_REFRESH_TIME_THRESHOLD = 2 // 不到2点不刷新
+    const val EPG_REFRESH_TIME_THRESHOLD = 0 // 不到0点不刷新
 
     /**
      * 网页源央视频Cookie
@@ -83,15 +83,14 @@ object Constants {
     /**
      * GitHub加速代理地址
      */
-    const val GITHUB_PROXY = "https://ghp.ci/"
+    const val GITHUB_PROXY = "https://ghfast.top/"
 
     /**
      * Git最新版本信息
      */
     val GIT_RELEASE_LATEST_URL = mapOf(
-        "stable" to "https://gitee.com/api/v5/repos/mytv-android/mytvstable/releases/latest",
-        "beta" to "https://gitee.com/api/v5/repos/mytv-android/mytvbeta/releases/latest",
-        "dev" to "https://gitee.com/api/v5/repos/mytv-android/mytvdev/releases/latest",
+        "stable" to "https://github.com/mytv-android/mytv-android/releases/latest",
+        "beta" to "https://github.com/mytv-android/mytv-android/releases",
     )
 
     /**

@@ -21,7 +21,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "电视直播"
+rootProject.name = "看电视"
 
 include(":core:data")
 include(":core:util")

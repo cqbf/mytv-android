@@ -3,12 +3,8 @@ name: Kotlin CI
 on:
   push:
     branches:
-      - main
+      - stable
       - beta
-      - dev
-  pull_request_target:
-    branches:
-      - dev
 
 jobs:
   build:
