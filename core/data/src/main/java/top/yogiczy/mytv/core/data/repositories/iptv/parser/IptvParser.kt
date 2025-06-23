@@ -54,7 +54,7 @@ interface IptvParser {
         val playbackFormat: String? = null,
     ) {
         companion object {
-            private fun List<ChannelItem>.toChannelList(): ChannelList {
+            private fun List<ChannelItem>.toChannelList(groupNum: Int = 0): ChannelList {
                 return ChannelList(groupBy { it.name }
                     .map { (channelName, channelList) ->
                         val first = channelList.first()
@@ -86,16 +86,18 @@ interface IptvParser {
                                     }
                             ),
                             logo = first.logo,
+                            index = groupNum,
                         )
                     })
             }
 
             fun List<ChannelItem>.toChannelGroupList(): ChannelGroupList {
+                var groupNum = 1
                 return ChannelGroupList(groupBy { it.groupName }
                     .map { (groupName, channelList) ->
                         ChannelGroup(
                             name = groupName,
-                            channelList = channelList.toChannelList(),
+                            channelList = channelList.toChannelList(groupNum++),
                         )
                     })
             }

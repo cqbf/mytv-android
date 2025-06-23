@@ -64,11 +64,12 @@ data class Channel(
     override fun equals(other: Any?): Boolean {
         if (other !is Channel) return false
 
-        return name == other.name && lineList == other.lineList
+        return name == other.name && index == other.index && lineList == other.lineList
     }
 
     override fun hashCode(): Int {
         var result = name.hashCode()
+        result = result + index * 31
         result = 31 * result + lineList.hashCode()
         return result
     }
