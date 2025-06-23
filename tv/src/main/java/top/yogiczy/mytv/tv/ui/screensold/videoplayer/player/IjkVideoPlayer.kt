@@ -72,7 +72,7 @@ class IjkVideoPlayer(
             // rtsp设置 https://ffmpeg.org/ffmpeg-protocols.html#rtsp
             setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "rtsp_transport", "tcp")
             setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "rtsp_flags", "prefer_tcp")
-            setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "buffer_size", 1316)
+            setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "buffer_size", 1316 * 512)
             setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "infbuf", 1)  // 无限读
             setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "flush_packets", 1L)
             setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "min-frames", 
