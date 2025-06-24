@@ -51,7 +51,7 @@ class IjkVideoPlayer(
     private var cacheSurfaceTexture: Surface? = null
     private var updateJob: Job? = null
 
-    private fun setOption() {
+    private fun setOption(userAgent: String = "okhttp") {
         player.apply {
             setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "allowed_extensions", "ALL")
             if (Configs.videoPlayerForceSoftDecode)
@@ -79,6 +79,7 @@ class IjkVideoPlayer(
                     max(10L, (Configs.videoPlayerBufferTime.toLong() * 0.03).toLong())
             )
 
+            setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "user_agent", userAgent)
             //  关闭播放器缓冲，这个必须关闭，否则会出现播放一段时间后，一直卡住，控制台打印 FFP_MSG_BUFFERING_START
             setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "packet-buffering", 0)
 
@@ -96,22 +97,23 @@ class IjkVideoPlayer(
                 return@launch
             var uri = playData.url
             var header: Map<String, String> = playData.headers ?: emptyMap()
-            val headers = Configs.videoPlayerHeaders.toHeaders() + mapOf(
-                "User-Agent" to (line.httpUserAgent ?: Configs.videoPlayerUserAgent),
+            var headers = Configs.videoPlayerHeaders.toHeaders() + mapOf(
                 "Referer" to (line.httpReferrer ?: ""),
                 "Origin" to (line.httpOrigin ?: ""),
-            "Cookie" to (line.httpCookie ?: ""),
+                "Cookie" to (line.httpCookie ?: ""),
             ).filterValues { it.isNotEmpty() } + header
-        
+            
+            val userAgent = headers["User-Agent"] ?: line.httpUserAgent ?: Configs.videoPlayerUserAgent
+            headers = headers - "User-Agent"
             // 使用应用内日志系统
             logger.i("播放地址: ${uri.toString()}")
             logger.i("请求头: $headers")
-            
+            logger.i("User-Agent: $userAgent")
             player.setDataSource(
                 uri,
                 headers
             )
-            setOption()
+            setOption(userAgent)
             player.prepareAsync()
 
             triggerPrepared()
